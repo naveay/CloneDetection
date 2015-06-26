@@ -1,0 +1,42 @@
+PA_struct_fields = 1
+PointsToInfo: 10 Alocs 3 ALocCalls 0
+
+Alocs: 
+10 6 0 0 0 
+9 6 0 0 0 
+8 11 0 1 0 
+7 0 1 7 0 CSNH_0xeced5cd9feccfc78_#string_CSTH1_4_CSTH2_4 
+6 9 0 1 0 !CSNH_0xe7d3caff5184ed25_printf 
+5 0 2 6 0 CSNH_0xb9b192a1482c993d_i-19!CSNH_0x33151c12e0f1cd9e_main: 
+4 0 2 6 0 CSNH_0x208949cc15176450_b-18!CSNH_0x33151c12e0f1cd9e_main: 
+3 0 2 6 0 CSNH_0xcc9f6176ce22f42f_a-17!CSNH_0x33151c12e0f1cd9e_main: 
+2 0 2 6 0 CSNH_0xa48eefbc51be34f7_main$return-16!CSNH_0x33151c12e0f1cd9e_main: 
+1 8 0 1 0 !CSNH_0x33151c12e0f1cd9e_main 
+
+Calls: 
+3 0 10 a 2 8 5 
+2 0 9 a 2 8 5 
+1 0 2 
+
+Alocs: 
+10 0 
+9 0 
+8 0 
+e 0 1 7 
+7 0 
+6 0 0 
+c 2 3 2 
+5 1 
+4 1 
+3 1 
+2 1 
+1 0 1 
+
+
+Selected 2
+8 37887488
+8 38871024
+
+Selected Ids 0
+
+Indirect 0

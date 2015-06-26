@@ -1,0 +1,82 @@
+Andersen's Pointer Analysis without Struct Fields
+Date: Mon Feb 23 00:02:53 2015
+
+Hint mask 3
+Ignore indirect calls? no
+Match parameters (+)
+Filter dereferences by types? yes
+Dynamic heap variables? yes
+Read points-to facts_ut:  0.00
+Read points-to facts_st:  0.04
+Read points-to facts_vm: 168554496
+Read points-to facts_rss: 11210752
+Read points-to facts_null_arena_used: 0
+Read points-to facts_null_arena_free: 0
+Read points-to facts_null_arena_ratio: 0.000
+Read points-to facts_null_arena_used_incr: 0
+Read points-to facts_null_arena_total_incr: 0
+Read points-to facts_store_page_faults: 18
+Read points-to facts_store_page_faults_accu: 18
+gt_pa: 495 ALocs (0 fields)
+gt_pa: 348 refs, 147 addr
+Edges 'in': 296 and 'out' 149, 147
+Inline mask <1,0,0,0,0,0,0,0,0,1,0,0>
+Inline limits <1,100,0,0>
+Inline Functions:
+Inline_ut:  0.00
+Inline_st:  0.00
+Inline_vm: 168554496
+Inline_rss: 11255808
+Inline_null_arena_used: 0
+Inline_null_arena_free: 0
+Inline_null_arena_ratio: 0.000
+Inline_null_arena_used_incr: 0
+Inline_null_arena_total_incr: 0
+Inline_store_page_faults: 0
+Inline_store_page_faults_accu: 18
+gt_pa: 495 ALocs (0 fields)
+gt_pa: 348 refs, 147 addr
+Edges 'in': 296 and 'out' 149, 147
+Compute points-to_ut:  0.01
+Compute points-to_st:  0.00
+Compute points-to_vm: 168554496
+Compute points-to_rss: 11264000
+Compute points-to_null_arena_used: 0
+Compute points-to_null_arena_free: 0
+Compute points-to_null_arena_ratio: 0.000
+Compute points-to_null_arena_used_incr: 0
+Compute points-to_null_arena_total_incr: 0
+Compute points-to_store_page_faults: 0
+Compute points-to_store_page_faults_accu: 18
+gt_pa: 495 ALocs (0 fields)
+gt_pa: 348 refs, 147 addr
+Edges 'in': 304 and 'out' 157, 147
+Points-to sets: 9, average 15
+Pointer variables: 10 average points-to: 13
+Selected points: 2, average points-to: 1
+Expr with alias set: 4, average aliases: 1
+
+Indirect histogram:
+
+Output points-to_ut:  0.00
+Output points-to_st:  0.00
+Output points-to_vm: 168562688
+Output points-to_rss: 11317248
+Output points-to_null_arena_used: 0
+Output points-to_null_arena_free: 0
+Output points-to_null_arena_ratio: 0.000
+Output points-to_null_arena_used_incr: 0
+Output points-to_null_arena_total_incr: 0
+Output points-to_store_page_faults: 0
+Output points-to_store_page_faults_accu: 18
+Free points-to_ut:  0.00
+Free points-to_st:  0.00
+Free points-to_vm: 34430976
+Free points-to_rss: 10207232
+Free points-to_null_arena_used: 0
+Free points-to_null_arena_free: 0
+Free points-to_null_arena_ratio: 0.000
+Free points-to_null_arena_used_incr: 0
+Free points-to_null_arena_total_incr: 0
+Free points-to_store_page_faults: 18446744073709551598
+Free points-to_store_page_faults_accu: 0

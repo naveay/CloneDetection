@@ -1,0 +1,382 @@
+	printf
+	procedureID: -4
+	 ID:-32
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:16
+	 kind name:return
+	 syntax name:return
+	 char name:return CSM_DEPENDENCES2( 
+#ifdef _MONOLITHIC_INPUT_OUTPUT
+          temp_INPUT_OUTPUT + temp_star_stdout,
+#else
+          0,
+#endif
+          (int) _LOCALE[LC_NUMERIC] + *format + * (char*) dot_dot_dot )
+	
+	------------------------
+	 ID:1
+	 kind name:entry
+	 syntax name:none
+	 char name:printf()
+	
+	------------------------
+	 ID:17
+	 kind name:exit
+	 syntax name:none
+	 char name:}
+	
+	------------------------
+	 ID:18
+	 kind name:formal-out
+	 syntax name:none
+	 char name:printf()
+	
+	------------------------
+	 ID:3
+	 kind name:formal-in
+	 syntax name:none
+	 char name:const char *format
+	
+	------------------------
+	 ID:19
+	 kind name:expression
+	 syntax name:return
+	 char name:CSM_DEPENDENCES2( 
+#ifdef _MONOLITHIC_INPUT_OUTPUT
+          temp_INPUT_OUTPUT + temp_star_stdout,
+#else
+          0, 
+#endif
+          ((int) _LOCALE[LC_NUMERIC] + *format + (int)dot_dot_dot) )
+	
+	------------------------
+	 ID:20
+	 kind name:return
+	 syntax name:return
+	 char name:return CSM_DEPENDENCES2( 
+#ifdef _MONOLITHIC_INPUT_OUTPUT
+          temp_INPUT_OUTPUT + temp_star_stdout,
+#else
+          0, 
+#endif
+          ((int) _LOCALE[LC_NUMERIC] + *format + (int)dot_dot_dot) )
+	
+	------------------------
+	 ID:5
+	 kind name:formal-in
+	 syntax name:none
+	 char name:...
+	
+	------------------------
+	 ID:7
+	 kind name:body
+	 syntax name:none
+	 char name:printf()
+	
+	------------------------
+	 ID:10
+	 kind name:expression
+	 syntax name:none
+	 char name:va_start (ap, format)
+	
+	------------------------
+	 ID:11
+	 kind name:expression
+	 syntax name:none
+	 char name:va_arg (ap, void*)
+	
+	------------------------
+	 ID:12
+	 kind name:expression
+	 syntax name:none
+	 char name:dot_dot_dot = va_arg (ap, void*)
+	
+	------------------------
+	 ID:13
+	 kind name:control-point
+	 syntax name:if
+	 char name:*format + CSM_UNKNOWN_INTEGER()
+	
+	------------------------
+	 ID:-34
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:¸Ê÷ª•+
+	
+	------------------------
+	 ID:14
+	 kind name:label
+	 syntax name:else
+	 char name:else
+	
+	------------------------
+	 ID:-33
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:15
+	 kind name:expression
+	 syntax name:return
+	 char name:CSM_DEPENDENCES2( 
+#ifdef _MONOLITHIC_INPUT_OUTPUT
+          temp_INPUT_OUTPUT + temp_star_stdout,
+#else
+          0,
+#endif
+          (int) _LOCALE[LC_NUMERIC] + *format + * (char*) dot_dot_dot )
+	
+	------------------------
+	 ID:6
+	 kind name:declaration
+	 syntax name:none
+	 char name:...
+	
+	------------------------
+	 ID:4
+	 kind name:declaration
+	 syntax name:none
+	 char name:const char *format
+	
+	------------------------
+	 ID:8
+	 kind name:declaration
+	 syntax name:none
+	 char name:va_list ap
+	
+	------------------------
+	 ID:-27
+	 kind name:declaration
+	 syntax name:none
+	 char name:Extern int TRULY_RANDOM_NUMBER
+	
+	------------------------
+	 ID:9
+	 kind name:declaration
+	 syntax name:none
+	 char name:void *dot_dot_dot
+	
+	------------------------
+	 ID:-28
+	 kind name:declaration
+	 syntax name:none
+	 char name:Extern char *_LOCALE[7]
+	
+	------------------------
+	 ID:-25
+	 kind name:declaration
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	main
+	procedureID: -3
+	 ID:16
+	 kind name:formal-out
+	 syntax name:none
+	 char name:main()
+	
+	------------------------
+	 ID:1
+	 kind name:entry
+	 syntax name:none
+	 char name:main()
+	
+	------------------------
+	 ID:17
+	 kind name:call-site
+	 syntax name:none
+	 char name:printf()
+	
+	------------------------
+	 ID:3
+	 kind name:body
+	 syntax name:none
+	 char name:main()
+	
+	------------------------
+	 ID:19
+	 kind name:expression
+	 syntax name:none
+	 char name:i++
+	
+	------------------------
+	 ID:20
+	 kind name:actual-in
+	 syntax name:none
+	 char name:i
+	
+	------------------------
+	 ID:21
+	 kind name:actual-in
+	 syntax name:none
+	 char name:"%d"
+	
+	------------------------
+	 ID:22
+	 kind name:call-site
+	 syntax name:none
+	 char name:printf()
+	
+	------------------------
+	 ID:7
+	 kind name:expression
+	 syntax name:none
+	 char name:a=0
+	
+	------------------------
+	 ID:8
+	 kind name:expression
+	 syntax name:none
+	 char name:b=1
+	
+	------------------------
+	 ID:24
+	 kind name:expression
+	 syntax name:for
+	 char name:i++
+	
+	------------------------
+	 ID:9
+	 kind name:expression
+	 syntax name:none
+	 char name:i=0
+	
+	------------------------
+	 ID:25
+	 kind name:actual-in
+	 syntax name:none
+	 char name:i
+	
+	------------------------
+	 ID:10
+	 kind name:expression
+	 syntax name:for
+	 char name:i=0
+	
+	------------------------
+	 ID:26
+	 kind name:actual-in
+	 syntax name:none
+	 char name:"%d"
+	
+	------------------------
+	 ID:11
+	 kind name:control-point
+	 syntax name:for
+	 char name:for( i<10
+	
+	------------------------
+	 ID:12
+	 kind name:expression
+	 syntax name:none
+	 char name:i=0
+	
+	------------------------
+	 ID:13
+	 kind name:control-point
+	 syntax name:while
+	 char name:i<10
+	
+	------------------------
+	 ID:14
+	 kind name:return
+	 syntax name:return
+	 char name:}
+	
+	------------------------
+	 ID:15
+	 kind name:exit
+	 syntax name:none
+	 char name:}
+	
+	------------------------
+	 ID:-12
+	 kind name:declaration
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:5
+	 kind name:declaration
+	 syntax name:none
+	 char name:int b
+	
+	------------------------
+	 ID:6
+	 kind name:declaration
+	 syntax name:none
+	 char name:int i
+	
+	------------------------
+	 ID:-14
+	 kind name:declaration
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:4
+	 kind name:declaration
+	 syntax name:none
+	 char name:int a
+	
+	------------------------
+	 ID:-16
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-17
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-18
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-19
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-20
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-21
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-22
+	 kind name:global-formal-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-23
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------
+	 ID:-24
+	 kind name:global-actual-in
+	 syntax name:none
+	 char name:
+	
+	------------------------

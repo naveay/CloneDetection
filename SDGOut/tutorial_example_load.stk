@@ -1,0 +1,3 @@
+(set! *load-path* (cons "/home/alex/Downloads/codesurfer-2.2p0/csurf/doc/examples/SDGOut" *load-path*))
+(load "libtutorial_example.so")
+(quit)

@@ -1,0 +1,282 @@
+
+/*
+ *      Copyright (c) 2005-2009, an unpublished work by GrammaTech, Inc.
+ *                      ALL RIGHTS RESERVED
+ *
+ *      This software is furnished under a license and may be used and
+ *      copied only in accordance with the terms of such license and the       
+ *      inclusion of the above copyright notice.  This software or any
+ *      other copies thereof may not be provided or otherwise made
+ *      available to any other person.  Title to and ownership of the
+ *      software is retained by GrammaTech, Inc.
+ */
+
+/* All relevant API header files must be included. Note in particular
+ * that two header files are needed for the AST API: cs_ast.h declares
+ * the general AST functions and types, and cs_ast_c.h declares the
+ * AST types specific to C/C++ programs.*/
+#include <stdio.h>
+#include <stdlib.h>
+#include "cs_ast.h"
+#include "cs_ast_c.h"
+#include "cs_sdg.h"
+#include "cs_pdg.h"
+#include "cs_pdg_vertex.h"
+#include "cs_pdg_vertex_set.h"
+#include "cs_types.h"
+#include "cs_utility.h"
+
+void ast_example(void);
+void cs_plug_main(void);
+
+
+/* CS_DEFINE_PLUGIN(s) registers s as a C API plugin.  It assumes
+ * void cs_plug_main(void) is defined and acts as the entry point to the
+ * plugin.  */
+CS_DEFINE_PLUGIN(libast_example);
+
+
+/* Must be defined in every plug-in: it acts as the entry point. */
+void cs_plug_main(void)
+{
+    printf("-----------------------\n");
+    printf("AST API Tutorial Output\n");
+    printf("-----------------------\n");
+
+    ast_example();
+}
+
+
+void rec_print_helper(cs_ast_field f, int ind, int levels);
+void pp_field(cs_ast_field f);
+
+
+/* Simple AST printing function and helpers. The levels parameter of
+ * full_ast_print() controls the depth to which the tree will be
+ * expanded. */
+
+void full_ast_print(cs_ast a, int levels){
+    cs_result res;
+    cs_ast_field *flds;
+    cs_size_t sz_flds;
+    int i;
+   
+    if (levels < 1) return;
+
+    printf("%s \n", cs_ast_class_name(cs_ast_get_class(a)));
+    res = cs_ast_fields (a, NULL, 0, &sz_flds);
+    if ((res == CS_SUCCESS) || (res == CS_TRUNCATED)){
+        flds = malloc(sz_flds);
+        res = cs_ast_fields (a, flds, sz_flds, &sz_flds);
+
+        if (levels > 0)
+            for (i = 0; i<(sz_flds/sizeof(cs_ast_field)); i++)
+                rec_print_helper(flds[i], 3, levels -1);
+    }
+}
+
+
+/* recursive helper function for full_ast_print() */
+void rec_print_helper(cs_ast_field f, int ind, int levels){
+
+    cs_ast_field *flds;
+    cs_size_t sz_flds;
+    cs_result res;
+    int i;
+
+    if (levels == 0) return;
+            
+    printf("%*s%s : ", 
+           ind,
+           "", 
+           cs_ast_ordinal_name(f.ordinal));
+
+    if (f.type == csft_ast){
+        printf("%s (AST)\n", 
+               cs_ast_class_name(cs_ast_get_class(f._.ast)));
+        res = cs_ast_fields (f._.ast, NULL, 0, &sz_flds);
+        if ((res == CS_SUCCESS) || (res == CS_TRUNCATED)){
+            flds = malloc(sz_flds);
+            res = cs_ast_fields (f._.ast, flds, sz_flds, &sz_flds);
+            for (i = 0; i< (sz_flds/sizeof(cs_ast_field)); i++)
+                rec_print_helper(flds[i], ind + 3, levels -1);
+        }
+    }
+    else{
+        pp_field(f);
+        printf("\n");
+    }
+}
+
+/* simple pretty printer for an AST field containing a primitive value */
+void pp_field(cs_ast_field f){
+    cs_string str;
+    cs_size_t sz;
+    cs_result res;
+
+    switch (f.type) {
+    case csft_boolean: {
+        if (f._.boolean) printf("cs_true"); else printf("cs_false");
+        break;
+    }
+    case csft_enumeration:{printf("%s",f._.enumeration.as_string);break;}
+    case csft_int8:{printf("%d",f._.int8);break;}
+    case csft_uint8:{printf("%u",f._.uint8);break;}
+    case csft_int16:{printf("%d",f._.int16);break;}
+    case csft_uint16:{printf("%u",f._.uint16);break;}
+    case csft_int32:{printf("%d",f._.int32);break;}
+    case csft_uint32:{printf("%u",f._.uint32);break;}
+    case csft_int64:{printf("(INT64)");break;}
+    case csft_uint64:{printf("(UINT64)");break;}
+    case csft_int128:{printf("(INT128)");break;}
+    case csft_uint128:{printf("(UINT128)");break;}
+    case csft_flt32:{printf("%f",f._.flt32);break;}
+    case csft_flt64:{printf("%f",f._.flt64);break;}
+    case csft_flt96:{printf("(FLT96)");break;}
+    case csft_flt128:{printf("(FLT128)");break;}
+    case csft_const_str64:{
+        res = cs_const_string64_value (f._.const_str64,
+                                       NULL,
+                                       0,
+                                       &sz);
+        if ((res == CS_SUCCESS) || (res == CS_TRUNCATED)){
+            str = malloc(sz * sizeof(char));
+            cs_const_string64_value (f._.const_str64,
+                                     str,
+                                     sz,
+                                     &sz);
+            printf("%s",str);
+        }
+        break;
+    }
+    case csft_const_str:{printf("%s",f._.const_str);break;}
+    }
+
+
+}
+
+/* The main function for AST API tutorial. Finds the first cc:variable
+ * AST for which the variable name is "french", then prints that AST
+ * to stdout.
+ */
+void ast_example(void)
+{
+    /* need to check return codes regularly */
+    cs_result csres, travres;     
+
+    /* variables for managing patterns */
+    cs_ast_pattern *pattern;      
+    cs_const_string patprob, paterr;
+    cs_size_t bsize;
+
+    /* variables for managing vertex traversal */
+    cs_pdg_vertex_set vertices;   
+    cs_pdg_vertex v;
+    cs_pdg_vertex_set_iter pv_it;
+
+    /* variables for managing ast traversal */
+    cs_ast ast, trav_ast;         
+    cs_ast_traverse_iter ast_it;
+    int found = 0;
+
+    cs_pdg main_pdg;
+
+    /* To maintain the parallel with the \link
+     * Tutorial/AST_API/AstTutorialScheme.html Scheme AST API
+     * tutorial\endlink, we are only interested in the ASTs in
+     * procedure main().*/
+    csres = cs_pdg_find("main", &main_pdg);   
+
+    if( (csres != CS_SUCCESS) && (csres != CS_TRUNCATED) ) {
+      printf("ERROR: %s\n", cs_resolve_error(csres));
+      return; 
+    }
+
+    /* The \link API/AST/API_AST_Patterns.html AST pattern-matching
+     * \endlink functionality in the C API uses cs_ast_pattern
+     * objects, which must be created with this function. The pattern
+     * can be broken down as follows:
+     * (cc:variable              an unnormalized AST representing a variable...
+     *   :source-correspondence (     ...whose :source-correspondence child...
+     *     cc:source-correspondence   ... is a cc:source-correspondence AST...
+     *       :name \"french\")        ...whose :name child has the value "french"
+     *
+     * For more information, see the \link
+     * @C_MODULE_ROOT@API/AST/csaf_c_unnormalized.html#variable cc:variable 
+     * \endlink documentation.
+     */
+    csres = cs_ast_pattern_compile ("(cc:variable \
+                                        :source-correspondence \
+                                        (cc:source-correspondence))", 
+                                    &pattern, 
+                                    &patprob, 
+                                    &paterr);
+    if (csres!=CS_SUCCESS){
+        printf("%s, error string is %s\n error problem is %s", 
+               cs_resolve_error(csres), 
+               paterr, 
+               patprob);
+            return;
+    }
+
+    /* Get all vertices in main(). There is no reason to expect any
+     * problem in getting the vertices of a PDG (but it's always a
+     * good idea to check the return code). */
+    if (cs_pdg_vertices(main_pdg,&vertices)!= CS_SUCCESS){
+        printf("ERROR: problem getting vertices\n");
+        cs_ast_pattern_close(pattern);
+        return;
+    }
+
+    /* Use the API's iterator functionality to check each vertex in
+     * turn. */                                     
+    for (csres = cs_pdg_vertex_set_iter_first(vertices, &v, &pv_it);
+         (csres != CS_OUT_OF_ELEMENTS) && (!found);
+         csres = cs_pdg_vertex_set_iter_next(&v,&pv_it) ){
+
+        /* Get the unnormalized AST associated with the
+         * vertex. Projects must be built with \link
+         * CsurfOptions.html#retain-pdg-vertex-to-ast-mapping-option
+         * -retain-pdg-vertex-to-ast-mapping yes \endlink if you will
+         * want to examine the \link
+         * @C_MODULE_ROOT@API/AST/csaf_c_unnormalized.html
+         * unnormalized ASTs \endlink associated with PDG_VERTEXes
+         * (the tutorial Makefile and run_tutorial.bat set this option
+         * for you). Note that there is at most one unnormalized AST
+         * associated with each PDG_VERTEX. */
+        if ( cs_pdg_vertex_ast (v, csaf_c_unnormalized , &ast) != CS_SUCCESS){
+            continue;
+        }
+
+        /* The variable might be nested inside other expressions, so
+         * every subtree of ast must be checked against the
+         * pattern. The AST API includes iterator functionality to
+         * support this. */
+        for (travres = cs_ast_iter_first (ast, csatf_normal, &trav_ast, &ast_it);
+             travres != CS_OUT_OF_ELEMENTS;
+             travres = cs_ast_iter_next (csatd_normal, &trav_ast, &ast_it)){
+
+            /* Attempt to match the pattern. We don't care about the
+             * variable bindings generated when the pattern is
+             * matched, only in whether or not the match
+             * succeeded. Therefore, we don't need to provide space to
+             * store the binding. */
+            csres = cs_ast_match(trav_ast,pattern,NULL,0,&bsize);
+
+            /* Note that CS_TRUNCATED is the expected result of a
+             * successful match, since we didn't provide any space for
+             * the resulting binding. Change the second argument to
+             * full_ast_print() if you want to print more (or fewer)
+             * levels of the matching AST.*/
+            if ((csres == CS_TRUNCATED)||(csres == CS_SUCCESS)){
+                printf("MATCH: \n");
+                full_ast_print(trav_ast, 3);
+                found = 1;
+                //break;
+            }
+        }
+        cs_ast_iter_close(&ast_it);
+    }
+    cs_pdg_vertex_set_iter_close(&pv_it);
+    cs_ast_pattern_close(pattern);
+}
