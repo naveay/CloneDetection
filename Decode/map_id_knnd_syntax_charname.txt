@@ -1,0 +1,100 @@
+ID:-4,-32
+
+ID:-4,16
+return CSM_DEPENDENCES2(  #ifdef _MONOLITHIC_INPUT_OUTPUT           temp_INPUT_OUTPUT + temp_star_stdout, #else           0, #endif           (int) _LOCALE[LC_NUMERIC] + *format + * (char*) dot_dot_dot )
+ID:-4,1
+printf()
+ID:-4,17
+ID:-4,18
+printf()
+ID:-4,3
+const char *format
+ID:-4,19
+CSM_DEPENDENCES2(  #ifdef _MONOLITHIC_INPUT_OUTPUT           temp_INPUT_OUTPUT + temp_star_stdout, #else           0,  #endif           ((int) _LOCALE[LC_NUMERIC] + *format + (int)dot_dot_dot) )
+ID:-4,20
+return CSM_DEPENDENCES2(  #ifdef _MONOLITHIC_INPUT_OUTPUT           temp_INPUT_OUTPUT + temp_star_stdout, #else           0,  #endif           ((int) _LOCALE[LC_NUMERIC] + *format + (int)dot_dot_dot) )
+ID:-4,5
+...
+ID:-4,7
+ID:-4,10
+va_start (ap, format)
+ID:-4,11
+va_arg (ap, void*)
+ID:-4,12
+dot_dot_dot = va_arg (ap, void*)
+ID:-4,13
+*format + CSM_UNKNOWN_INTEGER()
+ID:-4,-34
+øW9Uø*
+ID:-4,14
+else
+ID:-4,-33
+
+ID:-4,15
+CSM_DEPENDENCES2(  #ifdef _MONOLITHIC_INPUT_OUTPUT           temp_INPUT_OUTPUT + temp_star_stdout, #else           0, #endif           (int) _LOCALE[LC_NUMERIC] + *format + * (char*) dot_dot_dot )
+ID:-4,-27
+ID:-4,-25
+ID:-4,4
+ID:-4,-26
+ID:-4,6
+ID:-4,9
+ID:-4,8
+ID:-3,16
+main()
+ID:-3,1
+main()
+ID:-3,17
+ID:-3,3
+ID:-3,19
+i++
+ID:-3,20
+i
+ID:-3,21
+"%d"
+ID:-3,22
+ID:-3,7
+a=0
+ID:-3,8
+b=1
+ID:-3,24
+i++
+ID:-3,9
+i=0
+ID:-3,25
+i
+ID:-3,10
+i=0
+ID:-3,26
+"%d"
+ID:-3,11
+for( i<10
+ID:-3,12
+i=0
+ID:-3,13
+i<10
+ID:-3,14
+}
+ID:-3,15
+ID:-3,5
+ID:-3,-12
+ID:-3,6
+ID:-3,4
+ID:-3,-14
+ID:-3,-16
+
+ID:-3,-17
+
+ID:-3,-18
+
+ID:-3,-19
+
+ID:-3,-20
+
+ID:-3,-21
+
+ID:-3,-22
+
+ID:-3,-23
+
+ID:-3,-24
+

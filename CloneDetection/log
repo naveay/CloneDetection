@@ -1,0 +1,32 @@
+Start
+Job1 started
+Job1 Ended
+Job3 started
+Job3 Ended
+##Detect clone:  T1:T1 8:5,4:1
+##Detect clone:  T1:T2 5:6,1:2
+##Detect clone:  T2:T3 6:7,2:3
+##Detect clone:  T3:T1 7:8,3:5,3:4
+====================================
+Job2 started
+Job2 Ended
+Job3 started
+Job3 Ended
+##Detect clone:  T1:T1:T2 4:1:2,8:5:6
+##Detect clone:  T1:T2:T3 1:2:3,5:6:7
+##Detect clone:  T2:T3:T1 6:7:8,2:3:4,2:3:5
+##Detect clone:  T3:T1:T1 3:4:1,7:8:5
+====================================
+Job2 started
+Job2 Ended
+Job3 started
+Job3 Ended
+##Detect clone:  T1:T1:T2:T3 8:5:6:7,4:1:2:3
+##Detect clone:  T1:T2:T3:T1 5:6:7:8,1:2:3:5,1:2:3:4
+##Detect clone:  T2:T3:T1:T1 6:7:8:5,2:3:4:1
+##Detect clone:  T3:T1:T1:T2 7:8:5:6,3:4:1:2
+====================================
+Job2 started
+Job2 Ended
+Job3 started
+Job3 Ended
